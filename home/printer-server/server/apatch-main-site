@@ -1,0 +1,23 @@
+NameVirtualHost *
+<VirtualHost *>
+    ServerAdmin acentries@gmail.com
+    DocumentRoot /home/ubuntu/.userdata/public_html
+    ServerName ubuntud.comサーバーのホスト名
+    ErrorLog "/home/ubuntu/.userdata/logs/error_log"
+
+    <Directory "/virtual/ubuntud.com/public_html">
+        Options None
+        AllowOverride None
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+    ScriptAlias /cgi-bin/ /home/ubuntu/.userdata/cgi-bin/
+    <Directory "/home/ubuntu/.userdata/cgi-bin/">
+      AllowOverride None
+      Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+      Order allow,deny
+      Allow from all
+    </Directory>
+
+</VirtualHost>

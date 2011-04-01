@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+<title>jQuery Moblie test</title>
+<link rel="stylesheet" href="jquery.mobile-1.0a3.css" />
+<script src="http://code.jquery.com/jquery-1.5.min.js"></script>
+<script src=" jquery.mobile-1.0a3.js"></script>
+</head>
+<body>
+<div id="dummy"/>
+<!-- メインページ -->
+<div data-role="page" id="foo">
+
+<!-- メインページのヘッダ -->
+    <div data-role="header">
+        <h1>Main</h1>
+    </div><!-- /header -->
+
+<!-- メインページの内容。サブページへのボタン -->
+    <div data-role="content">
+        <p>Go To Subpage
+        <a href="#bar" data-role="button">SubPage</a>
+        </p>    
+    </div><!-- /content -->
+</div><!-- /page -->
+
+<!-- サブページ -->
+<div data-role="page" id="bar">
+
+<!-- サブページのヘッダ -->
+    <div data-role="header">
+        <h1>SubPage</h1>
+    </div><!-- /header -->
+
+<!-- サブページの内容 -->
+    <div data-role="content">   
+    <p>Sub Contents</p> 
+    </div><!-- /content -->
+
+    <div data-role="footer">
+        <h4>Page Footer</h4>
+    </div><!-- /header -->
+</div><!-- /page -->
+
+</body>

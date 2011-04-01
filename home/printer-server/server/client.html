@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+<title>jQuery Moblie test</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.css" />
+<script src="http://code.jquery.com/jquery-1.5.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.js"></script>
+<script>
+
+
+var local = "http://127.0.0.1:10080/printer_state?callback=?";
+var state_callback = "http://192.168.11.6/cgi-bin/printer_state?callback=?"
+var sound_dir = "http://192.168.11.6/"
+
+var serverNotAvailable = true;
+var serverPolling = setInterval(function(){
+  try{
+    //var notify = document.getElementById('notify');
+    if(serverNotAvailable){
+      $("#notify").html("");
+      $("#computer_state").html("コンピュータの準備中です。");
+      $("#printer_state").html("");
+      $("#scanner_state").html("");
+    }
+    serverNotAvailable = true;
+    $.getJSON(state_callback,null,function(data,status){
+      serverNotAvailable = false;
+      
+      if($("#notify").html() == ""){
+        $("#notify").html("<embed src='http://192.168.11.6/notify.wav' width='0' height='0' autostart='true' loop='false' hidden='true' />");
+      }
+      $("#computer_state").html(data.name);
+      $("#printer_state").html(data.printer_state);
+      $("#scanner_state").html(data.scanner_state);
+    });
+  }catch(e){
+  }
+},2000);
+
+function restart(target){
+  alert(target);
+}
+
+function pol(){
+try{
+    $.getJSON("http://127.0.0.1:10080/printer_state?callback=?",null,function(data,status){
+      alert(data.current_ip);
+    });
+}catch(e){
+}
+}
+
+</script>
+</head>
+<body>
+
+<div data-role="page" id="foo">
+  <div data-role="header">
+        <h1>プリンタ　コントロールパネル</h1>
+  </div>
+
+  <div data-role="content">
+    <div id='notify' ></div>
+    <div id="computer_state">
+      コンピュータの準備中です。
+    </div>
+    <form>
+      <div data-role='controlgroup' data-type='horizontal' class='ui-body ui-body-a'>
+        <input type="submit" value="プリントサーバーの再起動" onclick="pol()" data-theme='b' />
+        <span id='printer_state'></span>
+      </div>
+      <div data-role='controlgroup' data-type='horizontal' class='ui-body ui-body-a'>
+      <input type="submit" value="スキャナサーバーの再起動" onclick="restart('scanner')" data-theme='b' data-inline='true'/>
+      <span id='scanner_state' ></span>
+      
+      <div>
+    </form>
+  </div>
+</div>
+</body>

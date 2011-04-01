@@ -1,0 +1,6 @@
+{
+'name' : 'aspire-one-752 2.6.32-30-generic のプリンタ',
+'current_ip' : '192.168.10.8',
+'printer_state' : 'プリンター Canon_MP470_series_ubuntu は待機中です。2010年08月22日 12時45分26秒 以来有効です<br>プリンター Canon_MP470_series_USB_1 は待機中です。2011年03月30日 20時47分20秒 以来有効です<br>',
+'default_printer' : ' Canon_MP470_series_USB_1',
+}
