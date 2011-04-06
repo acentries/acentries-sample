@@ -13,16 +13,26 @@ client_main = "client.html"
 
 
 
-Dir.mkdir("public_html")
-Dir.mkdir("cgi-bin")
+def mk_dir(dir_name,&task)
+  Dir.mkdir(dir_name)
+  Dir.chdir(dir_name)
+  begin
+    task.call
+  ensure
+    Dir.chdir("../")
+  end
+end
 
-Dir.chdir("public_html")
-File.symlink("../" + client_main, client_main)
-File.symlink("/usr/share/sounds/purple/alert.wav","notify.wav")
 
-Dir.chdir("../cgi-bin")
-File.symlink("../" + cgi_main_path, cgi_main)
-File.symlink("../" + back_daemon, back_daemon)
+mk_dir("public_html"){
+  File.symlink("../" + client_main, client_main)
+  File.symlink("/usr/share/sounds/purple/alert.wav","notify.wav")
+}
+
+mk_dir("cgi-bin"){
+  File.symlink("../" + cgi_main_path, cgi_main)
+  File.symlink("../" + back_daemon, back_daemon)
+}
 
 
 #サイトの切り替え

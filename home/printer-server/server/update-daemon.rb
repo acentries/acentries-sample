@@ -5,16 +5,13 @@ def check_printer_state()
   ret = {}
   ret['current_ip']      = "#{ /IPv4 Settings:\s+Address:\s+([\w\.]+)/.match(`nm-tool`).to_a[1] }"
   ret['name']            = "#{ `uname -nr`.chomp } のプリンタ"
-  #ret['default_printer'] = `lpstat -d`.split(":")[1].chomp
   ret['printer_state']   = `lpstat -p`.gsub("\n","<br>")
   ret['scanner_state']   = `scanimage -L`.split(/[\r\n]+/).collect{|value| /device\s+`[^']+' is a (.+)/.match(value).to_a[1] }.compact.join("<br>")
 
   File.open("state.log","w"){|f|
-    f.write "{\n"
-    ret.each_pair{|key,value|
-      f.write "'#{key}' : '#{value}',\n"
-    }
-    f.write "}"
+    f.puts "{"
+    ret.each_pair{|key,value|  f.puts "'#{key}' : '#{value}'," }
+    f.print "}"
   }
   return ret
 end

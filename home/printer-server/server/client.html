@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <head>
 <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
-<title>jQuery Moblie test</title>
+<title>プリンタ</title>
+
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.css" />
-<script src="http://code.jquery.com/jquery-1.5.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.js"></script>
+<script src="http://code.jquery.com/jquery-1.5.min.js"/>
+<script src="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.js" />
+
 <script>
-
-
 var local = "http://127.0.0.1:10080/printer_state?callback=?";
 var state_callback = "http://192.168.11.6/cgi-bin/printer_state?callback=?"
 var sound_dir = "http://192.168.11.6/"
@@ -15,7 +15,6 @@ var sound_dir = "http://192.168.11.6/"
 var serverNotAvailable = true;
 var serverPolling = setInterval(function(){
   try{
-    //var notify = document.getElementById('notify');
     if(serverNotAvailable){
       $("#notify").html("");
       $("#computer_state").html("コンピュータの準備中です。");
@@ -23,7 +22,7 @@ var serverPolling = setInterval(function(){
       $("#scanner_state").html("");
     }
     serverNotAvailable = true;
-    $.getJSON(state_callback,null,function(data,status){
+    $.getJSON( state_callback, null, function( data, status ){
       serverNotAvailable = false;
       
       if($("#notify").html() == ""){
@@ -52,6 +51,8 @@ try{
 
 </script>
 </head>
+
+
 <body>
 
 <div data-role="page" id="foo">
